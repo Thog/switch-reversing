@@ -20,16 +20,16 @@ def main(pattern, filename):
 		f.write(''']
 
 for addr, sym in syms:
-	oldname = Name(addr)
+	oldname = get_name(addr, ida_name.GN_VISIBLE)
 	if oldname.startswith('sub_'):
-		MakeName(addr, sym)
-		MakeComm(addr, 'name from regex match')
+		set_name(addr, sym)
+		set_cmt(addr, 'name from regex match', 0)
 	elif oldname.startswith('loc_'):
-		MakeName(addr, sym)
-		MakeComm(addr, 'name from regex match')
-		print '%X %s %s' % (addr, oldname, sym)
+		set_name(addr, sym)
+		set_cmt(addr, 'name from regex match', 0)
+		print('%X %s %s' % (addr, oldname, sym))
 	elif oldname != sym:
-		print '%X %s %s' % (addr, oldname, sym)
+		print('%X %s %s' % (addr, oldname, sym))
 ''')
 
 			
